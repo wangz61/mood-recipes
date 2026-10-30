@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>Login · Mood Recipes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Montserrat", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Magenta/plum top → soft lavender-blue bottom (from the provided design) */
+      .login-bg {
+        min-height: 100vh;
+        background: linear-gradient(180deg, #d946ef 0%, #a21caf 22%, #7c3aed 55%, #a78bfa 82%, #c4d4ff 100%);
+      }
+      /* Plain CSS: gap above button + full width if Tailwind fails to load */
+      .login-btn {
+        display: block;
+        width: 100%;
+        margin-top: 2rem;
+        box-sizing: border-box;
+      }
+      .field-input {
+        width: 100%;
+        border: 0;
+        border-bottom: 1px solid #fff;
+        background: transparent;
+        padding: 0 0 0.5rem;
+        font-size: 15px;
+        color: #fff;
+        outline: none;
+      }
+      .field-input:focus { border-bottom-width: 2px; margin-bottom: -1px; }
+      .field-input:-webkit-autofill {
+        -webkit-text-fill-color: #fff;
+        transition: background-color 9999s;
+      }
+      .reveal { position: absolute; right: 0; bottom: 0.4rem; }
+    </style>
+  </head>
+  <body class="login-bg flex flex-col items-center justify-center px-5 py-8 font-sans antialiased">
+    <div class="w-full max-w-[400px] rounded-[28px] border border-white/35 bg-white/[0.06] px-8 pb-9 pt-8 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] backdrop-blur-[2px]">
+      <h1 id="title" class="mb-7 text-center text-[26px] font-bold tracking-tight text-white">Login</h1>
+
+      <p id="message" class="mb-5 hidden rounded-xl px-4 py-3 text-[14px] font-medium" role="status"></p>
+
+      <form id="auth-form" class="space-y-0" novalidate autocomplete="on">
+        <div class="mb-6">
+          <label for="email" class="mb-2 block text-[15px] font-medium text-white">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="username" class="field-input" />
+        </div>
+
+        <div class="mb-5" data-views="login register">
+          <label for="password" class="mb-2 block text-[15px] font-medium text-white">Password</label>
+          <div class="relative">
+            <input id="password" name="password" type="password" required minlength="8" autocomplete="current-password" class="field-input pr-14" />
+            <button type="button" id="reveal" class="reveal text-[12px] font-semibold uppercase tracking-wide text-white/80 hover:text-white" aria-pressed="false">
+              Show
+            </button>
+          </div>
+          <p id="password-hint" class="mt-2 hidden text-[12px] text-white/75" data-views="register">At least 8 characters.</p>
+        </div>
+
+        <div class="flex items-center justify-between gap-4 py-4" data-views="login">
+          <label class="flex cursor-pointer select-none items-center gap-2.5">
+            <input
+              id="remember"
+              type="checkbox"
+              name="remember"
+              class="h-[17px] w-[17px] shrink-0 cursor-pointer rounded-sm border-2 border-white bg-transparent accent-white focus:outline-none focus:ring-2 focus:ring-white/50"
+            />
+            <span class="text-[14px] font-medium text-white">Remember Me</span>
+          </label>
+          <a href="#forgot" class="whitespace-nowrap text-[14px] font-semibold text-white transition hover:text-white/90">Forget Password</a>
+        </div>
+
+        <p class="pb-2 pt-1 text-[14px] leading-relaxed text-white/85" data-views="forgot">
+          Enter the email you signed up with and we'll send you a link to choose a new password.
+        </p>
+
+        <button
+          id="submit"
+          type="submit"
+          class="login-btn w-full rounded-full bg-white py-3 text-[15px] font-bold tracking-wide text-[#1a0a2e] shadow-sm transition hover:bg-white/95 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-70"
+        >
+          Log in
+        </button>
+      </form>
+
+      <p class="mt-7 text-center text-[14px] text-white" data-views="login">
+        Don't have an account?
+        <a href="#register" class="font-bold text-white underline-offset-2 hover:underline">Register</a>
+      </p>
+      <p class="mt-7 text-center text-[14px] text-white" data-views="register forgot">
+        <span data-views="register">Already have an account?</span>
+        <span data-views="forgot">Remembered it?</span>
+        <a href="#login" class="font-bold text-white underline-offset-2 hover:underline">Log in</a>
+      </p>
+    </div>
+
+    <a href="/" class="mt-6 text-[14px] font-medium text-white/90 underline-offset-2 hover:underline">← Back to recipes</a>
+
+    <script src="/common.js"></script>
+    <script src="/login.js"></script>
+  </body>
+</html>
